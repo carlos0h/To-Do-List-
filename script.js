@@ -4,20 +4,16 @@ const lista = document.querySelector("#listaTarefas");
 
 const botoesCheck = document.querySelectorAll(".check");
 
-    botoesCheck.forEach(function(botao){
-        botao.addEventListener("click", function(){
+botoesCheck.forEach(function(botao) {
+    botao.addEventListener("click", function() {
         botao.parentElement.classList.toggle("concluida");
-    
     });
 });
 
-
-
-
-form.addEventListener("submit", function(event){
+form.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const texto = input.value; 
+    const texto = input.value;
 
     const tarefa = document.createElement("li");
 
@@ -25,18 +21,25 @@ form.addEventListener("submit", function(event){
     botaoCheck.classList.add("check");
     botaoCheck.textContent = "✓";
 
-    botaoCheck.addEventListener("click", function(){
+    botaoCheck.addEventListener("click", function() {
         tarefa.classList.toggle("concluida");
     });
-
 
     const textoTarefa = document.createElement("span");
     textoTarefa.textContent = texto;
 
+    const botaoExcluir = document.createElement("button");
+    botaoExcluir.classList.add("btnExcluir");
+    botaoExcluir.textContent = "🗑";
+
+    botaoExcluir.addEventListener("click", function() {
+        console.log("Botão excluir clicado!");
+        tarefa.remove();
+    });
+
     tarefa.appendChild(botaoCheck);
     tarefa.appendChild(textoTarefa);
-
-
+    tarefa.appendChild(botaoExcluir);
 
     lista.appendChild(tarefa);
 });
