@@ -2,12 +2,16 @@ const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
 
-const botoesCheck = document.querySelectorAll(".check");
+lista.addEventListener("click", function(event){
+    const item = event.target.closest("li");
+    if(!item) return;
 
-botoesCheck.forEach(function(botao) {
-    botao.addEventListener("click", function() {
-        botao.parentElement.classList.toggle("concluida");
-    });
+    if(event.target.classList.contains("check")){
+        item.classList.toggle("concluida");
+    }
+    if(event.target.classList.contains("btnExcluir")){
+        item.remove() 
+    }
 });
 
 form.addEventListener("submit", function(event) {
@@ -42,4 +46,6 @@ form.addEventListener("submit", function(event) {
     tarefa.appendChild(botaoExcluir);
 
     lista.appendChild(tarefa);
+
+    input.value = "";
 });
