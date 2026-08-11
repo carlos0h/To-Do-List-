@@ -1,6 +1,18 @@
 const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
+const contador = document.querySelector("#contador");
+
+function atualizarContador(){
+    const pendentes = lista.querySelectorAll("li:not(.concluida)").length;
+
+    if(pendentes == 1){
+        contador.textContent = "1 tarefa pendente";
+
+    }else{
+        contador.textContent = `${pendentes} tarefas pendentes`; 
+    }
+}
 
 lista.addEventListener("click", function(event) {
     const item = event.target.closest("li");
@@ -8,10 +20,12 @@ lista.addEventListener("click", function(event) {
 
     if (event.target.classList.contains("check")) {
         item.classList.toggle("concluida");
+        atualizarContador();
     }
 
     if (event.target.classList.contains("btnExcluir")) {
         item.remove();
+        atualizarContador();
     }
 });
 
@@ -38,6 +52,7 @@ form.addEventListener("submit", function(event) {
     tarefa.appendChild(botaoExcluir);
 
     lista.appendChild(tarefa);
-
+    atualizarContador();
     input.value = ""; 
 });
+    atualizarContador();
