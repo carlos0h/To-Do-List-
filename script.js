@@ -8,9 +8,9 @@ function verificarListaVazia(){
     const totalItens = lista.querySelectorAll("li").length;
     
     if(totalItens === 0){
-        listaVazia.style.display = "none";
-    }else{
         listaVazia.style.display = "block";
+    }else{
+        listaVazia.style.display = "none";
     }
 }
 
