@@ -32,7 +32,11 @@ lista.addEventListener("click", function(event) {
 form.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const texto = input.value;
+    const texto = input.value.trim();
+    if(texto == ""){
+        input.value = "";
+        return;
+    }
 
     const tarefa = document.createElement("li");
 
