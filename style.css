@@ -138,3 +138,9 @@ li span::after{
     background-color: #333;
     transition: width 0.3s;
 }
+
+#listaVazia{
+    display: none;
+    text-align: center;
+    color: #777;
+}
