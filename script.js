@@ -2,6 +2,18 @@ const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
 const contador = document.querySelector("#contador");
+const listaVazia = document.querySelector("#listaVazia");
+
+function verificarListaVazia(){
+    const totalItens = lista.querySelectorAll("li").length;
+    
+    if(totalItens === 0){
+        listaVazia.style.display = "none";
+    }else{
+        listaVazia.style.display = "block";
+    }
+}
+
 
 function atualizarContador(){
     const pendentes = lista.querySelectorAll("li:not(.concluida)").length;
@@ -21,11 +33,13 @@ lista.addEventListener("click", function(event) {
     if (event.target.classList.contains("check")) {
         item.classList.toggle("concluida");
         atualizarContador();
+        verificarListaVazia();
     }
 
     if (event.target.classList.contains("btnExcluir")) {
         item.remove();
         atualizarContador();
+        verificarListaVazia();
     }
 });
 
@@ -57,6 +71,8 @@ form.addEventListener("submit", function(event) {
 
     lista.appendChild(tarefa);
     atualizarContador();
+    verificarListaVazia();
     input.value = ""; 
 });
     atualizarContador();
+    verificarListaVazia();
