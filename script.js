@@ -42,6 +42,11 @@ lista.addEventListener("click", function(event) {
 
     if (event.target.classList.contains("check")) {
         item.classList.toggle("concluida");
+
+        const index = Array.from(lista.children).indexOf(item);
+        tarefas[index].concluida = item.classList.contains("concluida");
+        salvarTarefas();
+        
         atualizarContador();
         verificarListaVazia();
     }
@@ -50,9 +55,6 @@ lista.addEventListener("click", function(event) {
         const index = Array.from(lista.children).indexOf(item);
         tarefas.splice(index, 1);
         salvarTarefas();
-
-
-
 
         item.remove();
         atualizarContador();
