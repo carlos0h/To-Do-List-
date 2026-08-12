@@ -1,8 +1,18 @@
+let tarefas = [];
+
+
+
+
 const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
 const contador = document.querySelector("#contador");
 const listaVazia = document.querySelector("#listaVazia");
+
+function salvarTarefas(){
+    localStorage.setItem("tarefas", JSON.stringify(tarefas));
+}
+
 
 function verificarListaVazia(){
     const totalItens = lista.querySelectorAll("li").length;
@@ -51,6 +61,10 @@ form.addEventListener("submit", function(event) {
         input.value = "";
         return;
     }
+
+    const novaTarefa = {texto: texto, concluida: false};
+    tarefas.push(novaTarefa);
+    salvarTarefas();
 
     const tarefa = document.createElement("li");
 
