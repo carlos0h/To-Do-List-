@@ -1,4 +1,4 @@
-let tarefas = [];
+let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 
 
 
@@ -66,27 +66,41 @@ form.addEventListener("submit", function(event) {
     tarefas.push(novaTarefa);
     salvarTarefas();
 
-    const tarefa = document.createElement("li");
+    criarElementoTarefa(novaTarefa);
 
-    const botaoCheck = document.createElement("button");
-    botaoCheck.classList.add("check");
-    botaoCheck.textContent = "✓";
-
-    const textoTarefa = document.createElement("span");
-    textoTarefa.textContent = texto;
-
-    const botaoExcluir = document.createElement("button");
-    botaoExcluir.classList.add("btnExcluir");
-    botaoExcluir.textContent = "🗑";
-
-    tarefa.appendChild(botaoCheck);
-    tarefa.appendChild(textoTarefa);
-    tarefa.appendChild(botaoExcluir);
-
-    lista.appendChild(tarefa);
     atualizarContador();
     verificarListaVazia();
     input.value = ""; 
 });
+
+    function criarElementoTarefa(TarefaObj){
+        const tarefa = document.createElement("li");
+
+        if(TarefaObj.concluida){
+            tarefa.classList.add("concluida");
+        }
+
+        const botaoCheck = document.createElement("button");
+        botaoCheck.classList.add("check");
+        botaoCheck.textContent = "✓";
+
+        const textoTarefa = document.createElement("span");
+        textoTarefa.textContent = TarefaObj.texto;
+
+        const botaoExcluir = document.createElement("button");
+        botaoExcluir.classList.add("btnExcluir");
+        botaoExcluir.textContent = "🗑";
+
+        tarefa.appendChild(botaoCheck);
+        tarefa.appendChild(textoTarefa);
+        tarefa.appendChild(botaoExcluir);
+   
+        lista.appendChild(tarefa);
+    }
+
+    tarefas.forEach (function(TarefaObj){
+        criarElementoTarefa(TarefaObj);
+    });
+
     atualizarContador();
     verificarListaVazia();
