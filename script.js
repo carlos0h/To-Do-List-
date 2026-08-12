@@ -47,6 +47,13 @@ lista.addEventListener("click", function(event) {
     }
 
     if (event.target.classList.contains("btnExcluir")) {
+        const index = Array.from(lista.children).indexOf(item);
+        tarefas.splice(index, 1);
+        salvarTarefas();
+
+
+
+
         item.remove();
         atualizarContador();
         verificarListaVazia();
