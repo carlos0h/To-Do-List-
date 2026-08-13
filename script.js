@@ -1,5 +1,5 @@
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
-
+let filtroAtivo ="todas";
 
 
 
@@ -8,11 +8,36 @@ const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
 const contador = document.querySelector("#contador");
 const listaVazia = document.querySelector("#listaVazia");
+const botoesFiltro = document.querySelectorAll(".btnFiltro");
+
 
 function salvarTarefas(){
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
+function aplicarFiltro() {
+    const itens = lista.querySelectorAll("li");
+
+    itens.forEach(function(item) {
+        const concluida = item.classList.contains("concluida");
+
+        if (filtroAtivo === "todas") {
+            item.style.display = "flex";
+        } else if (filtroAtivo === "pendentes") {
+            if (concluida) {
+                item.style.display = "none";
+            } else {
+                item.style.display = "flex";
+            }
+        } else if (filtroAtivo === "concluidas") {
+            if (concluida) {
+                item.style.display = "flex";
+            } else {
+                item.style.display = "none";
+            }
+        }
+    });
+}
 
 function verificarListaVazia(){
     const totalItens = lista.querySelectorAll("li").length;
@@ -24,6 +49,17 @@ function verificarListaVazia(){
     }
 }
 
+botoesFiltro.forEach(function(botao){
+    botao.addEventListener("click", function(){
+        botoesFiltro.forEach(function(b){
+            b.classList.add("ativo");
+        });
+        botao.classList.add("ativo");
+
+        filtroAtivo = botao.dataset.filtro;
+        aplicarFiltro();
+    });
+});
 
 function atualizarContador(){
     const pendentes = lista.querySelectorAll("li:not(.concluida)").length;
@@ -46,9 +82,9 @@ lista.addEventListener("click", function(event) {
         const index = Array.from(lista.children).indexOf(item);
         tarefas[index].concluida = item.classList.contains("concluida");
         salvarTarefas();
-        
         atualizarContador();
         verificarListaVazia();
+        aplicarFiltro();
     }
 
     if (event.target.classList.contains("btnExcluir")) {
@@ -79,6 +115,7 @@ form.addEventListener("submit", function(event) {
 
     atualizarContador();
     verificarListaVazia();
+    aplicarFiltro();
     input.value = ""; 
 });
 
@@ -113,3 +150,4 @@ form.addEventListener("submit", function(event) {
 
     atualizarContador();
     verificarListaVazia();
+    aplicarFiltro();
