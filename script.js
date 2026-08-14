@@ -112,6 +112,30 @@ lista.addEventListener("dblclick", function(event){
 
         span.replaceWith(inputEdicao);
         inputEdicao.focus();
+
+        function salvarEdicao(){
+
+            const novoTexto = inputEdicao.value.trim();
+            const item = inputEdicao.closest("li");
+            const index = Array.from(lista.children).indexOf(item);
+
+            if(novoTexto == ""){
+                inputEdicao.replaceWith(span);
+                return;
+            }
+            span.textContent = novoTexto;
+            tarefas[index].texto = novoTexto;
+            salvarTarefas();
+
+            inputEdicao.replaceWith(span);
+        }
+        inputEdicao.addEventListener("blur", salvarEdicao);
+
+        inputEdicao.addEventListener("keydown", function(event){
+            if(event.key == "Enter"){
+                inputEdicao.blur();
+            }
+        });
     }
 });
 
