@@ -98,6 +98,23 @@ lista.addEventListener("click", function(event) {
     }
 });
 
+lista.addEventListener("dblclick", function(event){
+    if(!event.target.classList.contains("check") && !event.target.classList.contains("btnExcluir") 
+    && event.target.tagName == "SPAN"){
+
+        const span = event.target;
+        const textoAtual = span.textContent;
+
+        const inputEdicao = document.createElement("input");
+        inputEdicao.type = "text";
+        inputEdicao.classList.add("inputEdicao");
+        inputEdicao.value = textoAtual;
+
+        span.replaceWith(inputEdicao);
+        inputEdicao.focus();
+    }
+});
+
 form.addEventListener("submit", function(event) {
     event.preventDefault();
 
