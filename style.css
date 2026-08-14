@@ -170,3 +170,12 @@ li span::after{
     color: white;
     border-color: #333;
 }
+
+.inputEdicao{
+    flex: 1;
+    padding: 4px 8px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+}
