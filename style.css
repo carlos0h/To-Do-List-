@@ -223,3 +223,16 @@ li.categoria-pessoal {
     border-color: #333;
     outline: 2px solid #333;
 }
+
+.prazo{
+    font-size: 12px;
+    color: #777;
+    margin-left: auto;
+    padding-right: 8px;
+    white-space: nowrap;
+}
+
+.prazo.atrasada{
+    color: #d9534f;
+    font-weight: bold;
+}
