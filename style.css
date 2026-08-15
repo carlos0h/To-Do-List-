@@ -194,3 +194,15 @@ li span::after{
     border-color: #333;
     outline: 2px solid #333;
 }
+
+li.categoria-trabalho {
+    border-left: 5px solid #4a90d9;
+}
+
+li.categoria-estudo {
+    border-left: 5px solid #e0a72e;
+}
+
+li.categoria-pessoal {
+    border-left: 5px solid #6fbf73;
+}
