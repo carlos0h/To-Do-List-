@@ -206,3 +206,20 @@ li.categoria-estudo {
 li.categoria-pessoal {
     border-left: 5px solid #6fbf73;
 }
+
+#inputPrazo{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: inherit;
+    color: #333;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#inputPrazo :focus{
+    border-color: #333;
+    outline: 2px solid #333;
+}
