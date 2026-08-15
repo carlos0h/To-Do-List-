@@ -8,6 +8,7 @@ const contador = document.querySelector("#contador");
 const listaVazia = document.querySelector("#listaVazia");
 const botoesFiltro = document.querySelectorAll(".btnFiltro");
 const selectCategoria = document.querySelector("#selectCategoria");
+const inputPrazo = document.querySelector("#inputPrazo");
 
 function salvarTarefas(){
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -146,7 +147,7 @@ form.addEventListener("submit", function(event) {
         return;
     }
 
-    const novaTarefa = {texto: texto, concluida: false, categoria: selectCategoria.value};
+    const novaTarefa = {texto: texto, concluida: false, categoria: selectCategoria.value, prazo: inputPrazo.value};
     tarefas.push(novaTarefa);
     salvarTarefas();
 
@@ -156,10 +157,46 @@ form.addEventListener("submit", function(event) {
     verificarListaVazia();
     aplicarFiltro();
     input.value = ""; 
+    inputPrazo.value = "";
 });
+
+function estaAtrasada(prazo, concluida){
+    if (prazo == ""){
+        return false;
+    }
+    if(concluida){
+        return false;
+    }
+
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    const dataPrazo = new Date(prazo + "T00:00:00");
+
+    if(dataPrazo < hoje){
+        return true;
+    } else{
+        return false;
+    }
+}
 
 function criarElementoTarefa(TarefaObj){
     const tarefa = document.createElement("li");
+    const spanPrazo = document.createElement("span");
+    spanPrazo.classList.add("prazo");
+
+    if(TarefaObj.prazo !== ""){
+        const dataFormatada = new Date(TarefaObj.prazo + "T00:00:00");
+        const dia = String(dataFormatada.getDate()).padStart(2, "0");
+        const mes = String(dataFormatada.getMonth() + 1).padStart(2, "0");
+        const ano = dataFormatada.getFullYear();
+
+        spanPrazo.textContent = dia + "/" + mes + "/" + ano;
+
+        if(estaAtrasada(TarefaObj.prazo, TarefaObj.concluida)){
+            spanPrazo.classList.add("atrasada");
+        }
+    }
 
     if(TarefaObj.concluida){
         tarefa.classList.add("concluida");
@@ -180,6 +217,7 @@ function criarElementoTarefa(TarefaObj){
 
     tarefa.appendChild(botaoCheck);
     tarefa.appendChild(textoTarefa);
+    tarefa.appendChild(spanPrazo);
     tarefa.appendChild(botaoExcluir);
 
     lista.appendChild(tarefa);
