@@ -179,3 +179,18 @@ li span::after{
     font-family: inherit;
     font-size: inherit;
 }
+
+#selectCategoria{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+#selectCategoria:focus{
+    border-color: #333;
+    outline: 2px solid #333;
+}
