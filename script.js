@@ -1,7 +1,5 @@
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
-let filtroAtivo ="todas";
-
-
+let filtroAtivo = "todas";
 
 const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
@@ -9,7 +7,7 @@ const lista = document.querySelector("#listaTarefas");
 const contador = document.querySelector("#contador");
 const listaVazia = document.querySelector("#listaVazia");
 const botoesFiltro = document.querySelectorAll(".btnFiltro");
-
+const selectCategoria = document.querySelector("#selectCategoria");
 
 function salvarTarefas(){
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
@@ -52,7 +50,7 @@ function verificarListaVazia(){
 botoesFiltro.forEach(function(botao){
     botao.addEventListener("click", function(){
         botoesFiltro.forEach(function(b){
-            b.classList.add("ativo");
+            b.classList.remove("ativo");
         });
         botao.classList.add("ativo");
 
@@ -148,7 +146,7 @@ form.addEventListener("submit", function(event) {
         return;
     }
 
-    const novaTarefa = {texto: texto, concluida: false};
+    const novaTarefa = {texto: texto, concluida: false, categoria: selectCategoria.value};
     tarefas.push(novaTarefa);
     salvarTarefas();
 
@@ -160,35 +158,37 @@ form.addEventListener("submit", function(event) {
     input.value = ""; 
 });
 
-    function criarElementoTarefa(TarefaObj){
-        const tarefa = document.createElement("li");
+function criarElementoTarefa(TarefaObj){
+    const tarefa = document.createElement("li");
 
-        if(TarefaObj.concluida){
-            tarefa.classList.add("concluida");
-        }
-
-        const botaoCheck = document.createElement("button");
-        botaoCheck.classList.add("check");
-        botaoCheck.textContent = "✓";
-
-        const textoTarefa = document.createElement("span");
-        textoTarefa.textContent = TarefaObj.texto;
-
-        const botaoExcluir = document.createElement("button");
-        botaoExcluir.classList.add("btnExcluir");
-        botaoExcluir.textContent = "🗑";
-
-        tarefa.appendChild(botaoCheck);
-        tarefa.appendChild(textoTarefa);
-        tarefa.appendChild(botaoExcluir);
-   
-        lista.appendChild(tarefa);
+    if(TarefaObj.concluida){
+        tarefa.classList.add("concluida");
     }
 
-    tarefas.forEach (function(TarefaObj){
-        criarElementoTarefa(TarefaObj);
-    });
+    tarefa.classList.add("categoria-" + TarefaObj.categoria);
+    
+    const botaoCheck = document.createElement("button");
+    botaoCheck.classList.add("check");
+    botaoCheck.textContent = "✓";
 
-    atualizarContador();
-    verificarListaVazia();
-    aplicarFiltro();
+    const textoTarefa = document.createElement("span");
+    textoTarefa.textContent = TarefaObj.texto;
+
+    const botaoExcluir = document.createElement("button");
+    botaoExcluir.classList.add("btnExcluir");
+    botaoExcluir.textContent = "🗑";
+
+    tarefa.appendChild(botaoCheck);
+    tarefa.appendChild(textoTarefa);
+    tarefa.appendChild(botaoExcluir);
+
+    lista.appendChild(tarefa);
+}
+
+tarefas.forEach (function(TarefaObj){
+    criarElementoTarefa(TarefaObj);
+});
+
+atualizarContador();
+verificarListaVazia();
+aplicarFiltro();
