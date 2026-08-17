@@ -81,6 +81,26 @@ input:focus{
 #btnAdicionar:active{
     transform: scale(0.98);
 }
+.btnExcluir {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 4px;
+    background-color: transparent;
+    color: #999;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btnExcluir:hover {
+    color: #d9534f;
+    background-color: #fdecea;
+}
 
 ul{
     list-style: none;
@@ -105,14 +125,22 @@ li:hover {
 }
 .concluida .check{
     color: #333;
+    background-color: #333;
 }
+.concluida .check svg path{
+    stroke:white;
+}
+
 .concluida span::after{
     width: 100%;
 }
 .check{
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: 2px solid #333;
     border-radius: 4px;
