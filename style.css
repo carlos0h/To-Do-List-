@@ -28,9 +28,9 @@ h2{
 }
 
 header p{
-    text-align: center;
+   text-align: center;
     margin-top: 0;
-    color: #777;
+    color: #6b6f8a;
 }
 
 section {
@@ -51,35 +51,48 @@ form{
 }
 
 footer{
-    text-align: center;
-    margin-top: 30px;
-    color: #777;
-    font-size: 14px;
+     text-align: center;
+    margin-top: 40px;
+    color: #9498ab;
+    font-size: 13px;
 }
-input{
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #5a5d78;
+    margin-bottom: -4px;
+}
+input, select {
     width: 100%;
     box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: 0.3s;
+    padding: 12px;
+    border: 1px solid #dcdfe4;
+    border-radius: 8px;
+    font-family: inherit;
+    transition: 0.2s;
 }
-input:focus{
-    border-color: #333;
-    outline: 2px solid #333;
+
+input:focus, select:focus {
+    border-color: #2b2d42;
+    outline: 2px solid rgba(43, 45, 66, 0.15);
+    outline-offset: 1px;
 }
 #btnAdicionar{
-    padding:  10px;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
-    background-color: #333;
+    border-radius: 8px;
+    background-color: #2b2d42;
     color: white;
+    font-weight: 600;
+    letter-spacing: 0.3px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 #btnAdicionar:hover{
-    background-color: #555;
+    background-color: #3d3f5c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(43, 45, 66, 0.2);
 }
 
 #btnAdicionar:active{
