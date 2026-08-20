@@ -1,6 +1,7 @@
 let tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
 let filtroAtivo = "todas";
 
+// Referências aos elementos usados para controlar a interface da aplicação.
 const form = document.querySelector("form");
 const input = document.querySelector("#inputTarefa");
 const lista = document.querySelector("#listaTarefas");
@@ -10,10 +11,12 @@ const botoesFiltro = document.querySelectorAll(".btnFiltro");
 const selectCategoria = document.querySelector("#selectCategoria");
 const inputPrazo = document.querySelector("#inputPrazo");
 
+// Persiste a lista atual de tarefas no armazenamento local do navegador.
 function salvarTarefas(){
     localStorage.setItem("tarefas", JSON.stringify(tarefas));
 }
 
+// Atualiza a visibilidade dos itens de acordo com o filtro selecionado.
 function aplicarFiltro() {
     const itens = lista.querySelectorAll("li");
 
@@ -38,6 +41,7 @@ function aplicarFiltro() {
     });
 }
 
+// Exibe uma mensagem quando não há tarefas cadastradas.
 function verificarListaVazia(){
     const totalItens = lista.querySelectorAll("li").length;
     
@@ -60,6 +64,7 @@ botoesFiltro.forEach(function(botao){
     });
 });
 
+// Mantém o resumo da quantidade de tarefas ainda não concluídas.
 function atualizarContador(){
     const pendentes = lista.querySelectorAll("li:not(.concluida)").length;
 
@@ -71,6 +76,7 @@ function atualizarContador(){
     }
 }
 
+// Centraliza as ações de conclusão e exclusão dos itens da lista.
 lista.addEventListener("click", function(event) {
     const item = event.target.closest("li");
     if (!item) return; 
@@ -97,6 +103,7 @@ lista.addEventListener("click", function(event) {
     }
 });
 
+// Permite editar o texto de uma tarefa com um duplo clique.
 lista.addEventListener("dblclick", function(event){
     if(!event.target.classList.contains("check") && !event.target.classList.contains("btnExcluir") 
     && event.target.tagName == "SPAN"){
@@ -112,6 +119,7 @@ lista.addEventListener("dblclick", function(event){
         span.replaceWith(inputEdicao);
         inputEdicao.focus();
 
+        // Salva a edição ao perder o foco ou confirmar com Enter.
         function salvarEdicao(){
 
             const novoTexto = inputEdicao.value.trim();
@@ -138,6 +146,7 @@ lista.addEventListener("dblclick", function(event){
     }
 });
 
+// Valida e cadastra uma nova tarefa enviada pelo formulário.
 form.addEventListener("submit", function(event) {
     event.preventDefault();
 
@@ -160,6 +169,7 @@ form.addEventListener("submit", function(event) {
     inputPrazo.value = "";
 });
 
+// Informa se uma tarefa não concluída ultrapassou o prazo definido.
 function estaAtrasada(prazo, concluida){
     if (prazo == ""){
         return false;
@@ -180,6 +190,7 @@ function estaAtrasada(prazo, concluida){
     }
 }
 
+// Constrói o elemento visual de uma tarefa e o adiciona à lista.
 function criarElementoTarefa(TarefaObj){
     const tarefa = document.createElement("li");
     const spanPrazo = document.createElement("span");
